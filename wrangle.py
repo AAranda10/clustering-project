@@ -39,11 +39,11 @@ def train_validate_test(df):
     The function returns 3 dataframes and 3 series:
     X_train (df) & y_train (series), X_validate & y_validate, X_test & y_test. 
     '''
-    # split df into test (20%) and train_validate (80%)
-    train_validate, test = train_test_split(df, test_size=.2, random_state=123)
+    # split df into test (30%) and train_validate (70%)
+    train_validate, test = train_test_split(df, test_size=.3, random_state=123)
 
-    # split train_validate off into train (70% of 80% = 56%) and validate (30% of 80% = 24%)
-    train, validate = train_test_split(train_validate, test_size=.3, random_state=123)
+    # split train_validate off into train (60% of 70% = 42%) and validate (40% of 70% = 28%)
+    train, validate = train_test_split(train_validate, test_size=.4, random_state=123)
 
         
     # split train into X (dataframe, drop target) & y (series, keep target only)
