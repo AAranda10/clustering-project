@@ -47,25 +47,22 @@ def train_validate_test(df):
 
         
     # split train into X (dataframe, drop target) & y (series, keep target only)
-    X_train = train.drop(columns= ['taxvaluedollarcnt', 'assessmentyear', 'roomcnt', 'fips', 'heatingorsystemtypeid', 
-                                   'lotsizesquarefeet', 'propertylandusetypeid', 'regionidcity', 'regionidcounty', 'regionidzip', 
-                                   'roomcnt', 'unitcnt', 'yearbuilt', 'assessmentyear', 'propertylandusetypeid', 'latitude',
-                                   'longitude', 'rawcensustractandblock', 'structuretaxvaluedollarcnt',
-                                   'landtaxvaluedollarcnt', 'taxamount'])
-    X_validate = validate.drop(columns= ['taxvaluedollarcnt', 'assessmentyear', 'roomcnt', 'fips', 'heatingorsystemtypeid', 
-                                   'lotsizesquarefeet', 'propertylandusetypeid', 'regionidcity', 'regionidcounty', 'regionidzip', 
-                                   'roomcnt', 'unitcnt', 'yearbuilt', 'assessmentyear', 'propertylandusetypeid', 'latitude',
-                                   'longitude', 'rawcensustractandblock', 'structuretaxvaluedollarcnt',
-                                   'landtaxvaluedollarcnt', 'taxamount'])
-    X_test = test.drop(columns= ['taxvaluedollarcnt', 'assessmentyear', 'roomcnt', 'fips', 'heatingorsystemtypeid', 
-                                   'lotsizesquarefeet', 'propertylandusetypeid', 'regionidcity', 'regionidcounty', 'regionidzip', 
-                                   'roomcnt', 'unitcnt', 'yearbuilt', 'assessmentyear', 'propertylandusetypeid', 'latitude',
-                                   'longitude', 'rawcensustractandblock', 'structuretaxvaluedollarcnt',
-                                   'landtaxvaluedollarcnt', 'taxamount'])
+    X_train = train.drop(columns= ['parcelid', 'finishedsquarefeet12', 'propertycountylandusecode', 
+                                   'rawcensustractandblock', 'regionidcity', 'regionidcounty', 'structuretaxvaluedollarcnt',
+                                   'assessmentyear', 'landtaxvaluedollarcnt', 'taxamount', 'censustractandblock', 'tdate',
+                                   'propertylandusedesc'])
+    X_validate = validate.drop(columns= ['parcelid', 'finishedsquarefeet12', 'propertycountylandusecode', 
+                                   'rawcensustractandblock', 'regionidcity', 'regionidcounty', 'structuretaxvaluedollarcnt',
+                                   'assessmentyear', 'landtaxvaluedollarcnt', 'taxamount', 'censustractandblock', 'tdate',
+                                   'propertylandusedesc'])
+    X_test = test.drop(columns= ['parcelid', 'finishedsquarefeet12', 'propertycountylandusecode', 
+                                   'rawcensustractandblock', 'regionidcity', 'regionidcounty', 'structuretaxvaluedollarcnt',
+                                   'assessmentyear', 'landtaxvaluedollarcnt', 'taxamount', 'censustractandblock', 'tdate',
+                                   'propertylandusedesc'])
 
-    y_train = train[['taxvaluedollarcnt']]
-    y_validate = validate[['taxvaluedollarcnt']]
-    y_test = test[['taxvaluedollarcnt']]
+    y_train = train[['logerror']]
+    y_validate = validate[['logerror']]
+    y_test = test[['logerror']]
     return X_train, y_train, X_validate, y_validate, X_test, y_test
 
 
@@ -79,6 +76,9 @@ def min_max_scale(X_train, X_validate, X_test):
     '''
     # create the scaler object and fit it to X_train (i.e. identify min and max)
     # if copy = false, inplace row normalization happens and avoids a copy (if the input is already a numpy array).
+    X_train = X_train.drop(columns= ['logerror', 'is_la_county', 'is_orange_county', 'is_ventura_county'])
+    X_validate = X_validate.drop(columns= ['logerror', 'is_la_county', 'is_orange_county', 'is_ventura_county'])
+    X_test = X_test.drop(columns= ['logerror', 'is_la_county', 'is_orange_county', 'is_ventura_county'])
     
     scaler = MinMaxScaler(copy = True).fit(X_train)
 
