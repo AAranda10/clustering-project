@@ -3,11 +3,15 @@
 ### Author: Austin Aranda
 
 ## Description: 
+
 The purpose of this project is to develop a model that is able to predict log error for the counties of Los Angeles, Orange, and Ventura, using the Zillow dataset. I intend to discover the key features that most accurately predict property value. 
 
 In addition, I have provided these deliverables:
+
     1. Map showing variations in property values by location.
+    
     2. Acquire.py, Prep.py, Wrangle.py files to be able to recreate my efforts.
+    
     3. Presentation with the results of our findings.
 
 ## Project Planning
