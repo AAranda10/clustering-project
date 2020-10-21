@@ -14,7 +14,7 @@ from scipy import stats
 
 # In[2]:
 '''
-    This function is going to take in the acquired data and clean it. Removing null values, outliers, and columns we will not need to assess the data or build our models. 
+    This function will locate and count the number of rows that are missing from the dataframe so we can make decisions on how to handle this missing data 
     '''
 
 def missing_rows(df):
@@ -23,7 +23,9 @@ def missing_rows(df):
     missing_rows = pd.DataFrame({'num_rows_missing':num_rows_missing,'pct_rows_missing':pct_rows_missing})
     return missing_rows
 
-
+'''
+    This function will locate and count the number of columns that are missing from the dataframe so we can make decisions on how to handle this missing data 
+    '''
 
 def missing_cols(df):
     num_cols_missing = df.isnull().sum(axis=1)
@@ -32,7 +34,9 @@ def missing_cols(df):
     cols_missing = pd.DataFrame({'num_cols_missing':num_cols_missing, 'pct_cols_missing':pct_cols_missing, 'num_rows': num_rows})
     return cols_missing
 
-
+'''
+    This function will drop all the nulls that exceed a 70 percent threshold because I decided that I wanted the model to be as accurate as possible and null values will make for a weaker model 
+    '''
 
 def drop_nulls(df, prop_required_column = .70, prop_required_row = .70):
     threshold = int(round(prop_required_column*len(df.index),0))
@@ -40,6 +44,10 @@ def drop_nulls(df, prop_required_column = .70, prop_required_row = .70):
     threshold = int(round(prop_required_row*len(df.columns),0))
     df.dropna(axis=0, thresh=threshold, inplace=True)
     return df
+
+'''
+    This function will drop all clean, drop, and fill null values in this dataframe that make it easier to model and explore the data provided. This function will also address for the outliers in this dataset that could prove impactful on our models. 
+    '''
 
 def prep_zillow_data():
     df = acquire.get_zillow_data()

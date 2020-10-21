@@ -10,7 +10,7 @@ def get_connection(db, user=user, host=host, password=password):
     return f'mysql+pymysql://{user}:{password}@{host}/{db}'
 
     '''
-    this function will return the zillow data from the CodeUp Database, you will need your own env.py file to gain access 
+    this function will return the zillow data from the CodeUp Database, you will need your own env.py file to gain access. this function will pull all the zillow data needed to recreate this project to include all the tables. 
     '''
 
 def get_zillow_data():

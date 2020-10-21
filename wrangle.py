@@ -31,9 +31,9 @@ from env import host, user, password
 def train_validate_test(df):
     '''
     this function takes in a dataframe and splits it into 3 samples, 
-    a test, which is 20% of the entire dataframe, 
-    a validate, which is 24% of the entire dataframe,
-    and a train, which is 56% of the entire dataframe. 
+    a test, which is 30% of the entire dataframe, 
+    a validate, which is 28% of the entire dataframe,
+    and a train, which is 42% of the entire dataframe. 
     It then splits each of the 3 samples into a dataframe with independent variables
     and a series with the dependent, or target variable. 
     The function returns 3 dataframes and 3 series:
